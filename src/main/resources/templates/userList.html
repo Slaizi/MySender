@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Users</title>
+	<div th:insert="~{parts/layout :: head}"/>
+</head>
+<body>
+<div th:insert="~{parts/layout :: body}"/>
+<div class="container">
+		<table class="table table-hover">
+			<thead>
+			<tr>
+				<th scope="col">#id</th>
+				<th scope="col">User Name</th>
+				<th scope="col">Role</th>
+			</tr>
+			</thead>
+			<tbody th:each="user : ${users}">
+			<tr>
+				<th scope="row" th:text="${user.id}"></th>
+				<td th:text="${user.username}"></td>
+				<td th:text="${#strings.arrayJoin(user.roles, ', ')}"></td>
+				<td>
+					<a class="btn btn-outline-primary" th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a>
+					<a class="btn btn-outline-primary" th:href="@{/user/{id}(id=${user.id})}">Delete</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

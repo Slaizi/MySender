@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Edit</title>
+	<div th:insert="~{parts/layout :: head}"/>
+</head>
+<body>
+<div th:insert="~{parts/layout :: body}"/>
+<div class="container">
+	<form class="mt-5" th:method="POST" th:object="${user}" th:action="@{/user}">
+		<div class="form-group row">
+			<div class="col-sm-4">
+				<input class="form-control rounded" type="text" name="username" th:value="${user.username}">
+			</div>
+		</div>
+		<div th:each="role : ${roles}">
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" name="roles" th:field="*{roles}"
+					       th:value="${role}" th:checked="${user.roles.contains(role)}"/>
+				<label class="form-check-label" th:text="${role}">role</label>
+			</div>
+		</div>
+		<input type="hidden" name="userId" th:value="${user.id}">
+		<button class="btn btn-outline-primary" type="submit">Save</button>
+	</form>
+</div>
+</body>
+</html>

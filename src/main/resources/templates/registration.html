@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Registration</title>
+	<div th:insert="~{parts/layout :: head}"/>
+</head>
+<body>
+<div th:insert="~{parts/layout :: body}"/>
+<div class="container">
+	<div th:with="action=@{/registration}">
+		<div th:replace="parts/formLogin :: form"/>
+	</div>
+</div>
+</body>
+</html>

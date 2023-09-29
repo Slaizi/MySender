@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Messages</title>
+	<div th:insert="~{parts/layout :: head}"/>
+</head>
+<body>
+<div th:insert="~{parts/layout :: body}"/>
+<div class="container">
+	<div th:if="${messages}">
+		<table class="table table-hover">
+			<thead>
+			<tr>
+				<th scope="col">Email</th>
+				<th>Time of creation</th>
+			</tr>
+			</thead>
+			<tbody th:each="message : ${messages}">
+			<tr>
+				<td th:text="${message.email}"></td>
+				<td th:text="${#temporals.format(message.createMessage, 'dd-MM-yyyy HH:mm:ss')}"></td>
+				<td>
+					<button type="button" class="btn btn-outline-primary" data-toggle="modal"
+					        th:data-target="'#exampleModalLong-' + ${message.id}">
+						Message details
+					</button>
+					
+					<!-- Modal -->
+					<div class="modal fade" th:id="'exampleModalLong-' + ${message.id}"
+					     tabindex="-1" role="dialog" th:aria-labelledby="'exampleModalLongTitle-' + ${message.id}"
+					     aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle" th:text="${message.title}">Title</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p th:text="${message.sms}" style="word-wrap: break-word;"></p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Ok</button>
+									<a class="btn btn-outline-danger" th:href="@{/send/{id}(id=${message.id})}" role="button">Delete</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

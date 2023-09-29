@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<div th:insert="~{parts/layout :: head}"/>
+</head>
+<body style="background-color: #f8f9fa;">
+<div th:insert="~{parts/layout :: body}"/>
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+	<div th:if="${message}">
+		<div class="alert alert-danger" th:text="${message}"></div>
+	</div>
+	<div>
+		<h1 style="text-align: center; margin-top: 2rem; margin-bottom: 1rem;">Welcome to MySender</h1>
+		<p class="text-center">This is a secure login page. Please enter your credentials to access your account.</p>
+		
+		
+		<div th:with="action=@{/login}">
+			<div class="w-100 h-100">
+				<div class="card border-primary mb-3" style="width: 100%; max-width: 600px; background-color: #ffffff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+					<div class="card-header text-center" style="color: black;">Login</div>
+					<div class="card-body" style="padding: 2rem;">
+						<div th:replace="parts/formLogin :: form"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
